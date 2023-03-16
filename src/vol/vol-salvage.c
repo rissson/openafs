@@ -3351,7 +3351,8 @@ JudgeEntry(void *arock, char *name, afs_int32 vnodeNumber,
 		    } else if (vnodeNumber == 1) {
 			Log("dir vnode %d: %s" OS_DIRSEP "%s is invalid (vnode %d, unique %d) -- %sdeleted\n", dir->vnodeNumber, (dir->name ? dir->name : "??"), name, vnodeNumber, unique, (Testing ? "would have been " : ""));
 		    } else {
-			Log("dir vnode %u: %s" OS_DIRSEP "%s already claimed by directory vnode %u (vnode %u, unique %u) -- %sdeleted\n", dir->vnodeNumber, (dir->name ? dir->name : "??"), name, vnodeEssence->parent, vnodeNumber, unique, (Testing ? "would have been " : ""));
+                        // We allow hardlinks in different directories.
+                        return 0;
 		    }
 		}
 		if (!Testing) {

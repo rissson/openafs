@@ -4312,10 +4312,6 @@ SAFSS_Link(struct rx_call *acall, struct AFSFid *DirFid, char *Name,
 	errorCode = EISDIR;
 	goto Bad_Link;
     }
-    if (targetptr->disk.parent != DirFid->Vnode) {
-	errorCode = EXDEV;
-	goto Bad_Link;
-    }
     if (parentptr->disk.cloned) {
 	ViceLog(25, ("Link : calling CopyOnWrite on  target dir\n"));
 	if ((errorCode = CopyOnWrite(parentptr, volptr, 0, MAXFSIZE)))
